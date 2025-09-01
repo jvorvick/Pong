@@ -1,18 +1,17 @@
 from settings import *
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, groups):
+    def __init__(self, groups):
         super().__init__(groups)
-        self.image = pygame.Surface((40,100))
+        self.image = pygame.Surface(SIZE['paddle'])
         self.image.fill(COLORS['paddle'])
-        self.rect = self.image.get_frect(center = pos)
+        self.rect = self.image.get_frect(center = POS['player'])
         self.direction = pygame.Vector2()
-        self.speed = 300
+        self.speed = SPEED['player']
 
     def input(self):
         keys = pygame.key.get_pressed()
-        self.direction.y = int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP])
-        print(self.direction)
+        self.direction.y = int(keys[pygame.K_DOWN] or keys[pygame.K_s]) - int(keys[pygame.K_UP] or keys[pygame.K_w])
 
     def move(self, dt):
         if (

@@ -1,5 +1,6 @@
 from settings import * 
 from player import Player
+from ball import Ball
 
 class Game:
     def __init__(self):
@@ -16,7 +17,8 @@ class Game:
         self.setup()
 
     def setup(self):
-        Player(POS['player'], self.all_sprites)
+        Player(self.all_sprites)
+        Ball(self.all_sprites)
 
     def run(self):
         while self.running:
@@ -32,7 +34,7 @@ class Game:
             self.all_sprites.update(dt)
 
             # draw
-            self.display_surface.fill('black')
+            self.display_surface.fill(COLORS['bg'])
             self.all_sprites.draw(self.display_surface)
             pygame.display.update()
 
