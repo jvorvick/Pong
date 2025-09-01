@@ -16,7 +16,7 @@ class Game:
         self.setup()
 
     def setup(self):
-        Player(self.display_surface, POS['player'], self.all_sprites)
+        Player(POS['player'], self.all_sprites)
 
     def run(self):
         while self.running:
@@ -29,7 +29,7 @@ class Game:
                     self.running = False
 
             # update
-            # self.all_sprites.update(dt)
+            self.all_sprites.update(dt)
 
             # draw
             self.display_surface.fill('black')
