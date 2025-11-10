@@ -58,6 +58,9 @@ class Ball(pygame.sprite.Sprite):
         self.old_rect = self.rect.copy()
         self.direction = pygame.Vector2(choice((1,-1)),uniform(0.7, 0.8) * choice((-1,1)))
 
+        # reset
+        self.reset_time = 0
+
     def move(self, dt):
         self.rect.x += self.direction.x * SPEED['ball'] * dt
         self.collision('horizontal')
@@ -96,11 +99,18 @@ class Ball(pygame.sprite.Sprite):
             self.reset()
 
     def reset(self):
-        self.rect.center = (WINDOW_WIDTH /  2, WINDOW_HEIGHT / 2)
-        self.direction = pygame.Vector2(choice((1,-1)),uniform(0.7, 0.8) * choice((-1,1)))
+        self.rect.center = (WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2)
+        self.reset_time = pygame.time.get_ticks()
 
+    def reset_timer(self):
+        if pygame.time.get_ticks() - self.reset_time >= 2000:
+            self.direction = pygame.Vector2(choice((1,-1)),uniform(0.7, 0.8) * choice((-1,1)))
+            self.reset_time = 0
 
     def update(self, dt):
-        self.old_rect = self.rect.copy()
-        self.move(dt)
-        self.wall_collision()
+        if self.reset_time == 0:
+            self.old_rect = self.rect.copy()
+            self.move(dt)
+            self.wall_collision()
+        else:
+            self.reset_timer()
