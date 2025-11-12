@@ -7,7 +7,8 @@ class Paddle(pygame.sprite.Sprite):
 
         # image
         self.image = pygame.Surface(SIZE['paddle'], pygame.SRCALPHA)
-        pygame.draw.rect(self.image, COLORS['paddle'], pygame.FRect((0,0), SIZE['paddle']), 0, 4)
+        pygame.draw.rect(self.image, COLORS['paddle shadow'], pygame.FRect((0,0), SIZE['paddle']), 0, 4)
+        pygame.draw.rect(self.image, COLORS['paddle'], pygame.FRect((0,0), (SIZE['paddle'][0] - 2, SIZE['paddle'][1] - 2)), 0, 4)
 
         # rect & movement
         self.rect = self.image.get_frect(center = POS['player'])
@@ -115,6 +116,3 @@ class Ball(pygame.sprite.Sprite):
             self.wall_collision()
         else:
             self.reset_timer()
-
-# class BallShadow(pygame.spirte.Sprite):
-#     def 
