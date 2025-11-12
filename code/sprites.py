@@ -51,7 +51,8 @@ class Ball(pygame.sprite.Sprite):
 
         #image
         self.image = pygame.Surface(SIZE['ball'], pygame.SRCALPHA)
-        pygame.draw.circle(self.image, COLORS['ball'], (SIZE['ball'][0] / 2,SIZE['ball'][1] / 2), SIZE['ball'][0] / 2)
+        pygame.draw.circle(self.image, COLORS['ball shadow'], (SIZE['ball'][0] / 2,SIZE['ball'][1] / 2), SIZE['ball'][0] / 2)
+        pygame.draw.circle(self.image, COLORS['ball'], ((SIZE['ball'][0] - 1) / 2, (SIZE['ball'][1] -1) / 2), (SIZE['ball'][0] - 2) / 2)
 
         # rect & movement
         self.rect = self.image.get_frect(center = (WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
@@ -114,3 +115,6 @@ class Ball(pygame.sprite.Sprite):
             self.wall_collision()
         else:
             self.reset_timer()
+
+# class BallShadow(pygame.spirte.Sprite):
+#     def 
